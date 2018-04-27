@@ -1,0 +1,103 @@
+1. adding: INSERT INTO
+updating: UPDATE
+deleting: DELETE
+
+2. 
+INSERT INTO: defines a set of rows that will be inserted into the table. You can insert multiple or single rows.
+INSERT INTO (table name) (column names);
+
+UPDATE: will update data using SET and WHERE. Can update multiple values or just one.
+UPDATE (table name) SET (column name)=(new value) WHERE (column name)=(value);
+
+DELETE: Will delete whichever data is specified. It is irreversible.
+DELETE FROM (table name) WHERE (column name)=(value);
+
+3. Data types to be used in a table:
+Text- a person's name
+Date- their date of birth
+Numeric- year of graduation
+
+4.
+-
+    -First and Last Name: text
+    -Whether they sent in an RSVP: boolean
+    -Number of guests: numeric
+    -Number of meals: numeric
+
+-CREATE TABLE guests(
+    first name text,
+    last name text,
+    RSVP received boolean,
+    guest number numeric,
+    meal number numeric
+);
+
+- ALTER TABLE guests ADD COLUMN thank you boolean;
+- ALTER TABLE guests DROP COLUMN meal number;
+- ALTER TABLE guests ADD COLUMN table number numeric;
+- ALTER TABLE guests DROP COLUMN table number;
+
+5.
+CREATE TABLE books (
+   ISBN varchar,
+   title text,
+   author text,
+   genre text,
+   publishing date date,
+   number of copies integer,
+   available copies integer 
+);
+
+-
+INSERT INTO books 
+VALUES 
+(978-0743273565, 'The Great Gatsby', 'F. Scott Fitzgerald', 'Novel', 2, 1),
+(978-7543321724, 'The Catcher in the Rye', 'J.D. Salinger', 'Novel', 5, 0),
+(978-0802136831, 'The Six Wives of Henry VIII', 'Alison Weir', 'Non-Fiction', 1, 1);
+
+-UPDATE books SET available copies = 0 WHERE ISBN=978-0802136831;
+-DELETE FROM books WHERE isbn = 978-7543321724;
+
+6.
+CREATE TABLE spacecrafts (
+    id varchar,
+    name text,
+    year launched integer,
+    country of origin text,
+    brief description text,
+    orbiting body text,
+    currently operating boolean,
+    miles from earth varchar
+);
+
+INSERT INTO spacecrafts 
+VALUES
+('1966-027A', 'Luna 10', 1966, 'Soviet Union', 'First artificial satellite of the moon', 'Moon', 'N', '235000'),
+('2010-020D', 'Akatsuki', 2010, 'Japan', 'A Japanese space mission to Venus', 'Venus', Y, '25 Million'),
+('2013-063A', 'Maven', 2013, 'USA', 'Developed by NASA to study the Martian atmosphere while orbiting Mars', 'Mars', Y, '123 Million');
+
+DELETE FROM spacecrafts WHERE id='1966-027A';
+UPDATE spacecrafts SET currently orbiting=N WHERE id='2010-020D';
+
+7.
+CREATE TABLE inbox (
+    id integer,
+    subject line text,
+    sender text,
+    additional recipients text SET DEFAULT 'None',
+    email body text,
+    time timestamp,
+    read boolean,
+    email chain id integer
+);
+
+INSERT INTO inbox
+VALUES
+(0100, 'Meeting at 10', 'Jon Smith', 'None', 'Can you come to a meeting at 10?', 2018-03-13 09:06:00, N, 123),
+(0200, 'Please run report', 'Susan Looney', 'Jon Smith', 'Please run the report and send to me by 10.', 2018-03-13 09:07:00, Y, 124),
+(0300, 'Hold off on running reports', 'Jane Doe', 'All_Office_distribution', 'Please hold off on running reports.', 2018-03-13 09:07:00, N, 125);
+
+DELETE FROM inbox WHERE id=0200;
+UPDATE inbox SET read=N WHERE id=0300;
+
+
