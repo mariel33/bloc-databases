@@ -1,0 +1,55 @@
+1. The data types are as follows: 
+-text
+-integer
+-date
+-float
+-float
+
+2. A database would be used when you have large amounts of data which need indexing and efficient data.
+If you don't have a large amount of data and want human-readable data you can use a text file to read and edit data files. 
+
+3. SQL is a declarative language, where most programming languages are procedural.
+
+4.  A database is a collection of related data that is translated into usable information.
+This data is managed through an interface and displayed in a table. 
+The data can be queried and manipulated.
+
+5. A table holds data in a database and is structued with columns that define what the data is and rows that make up a complete conceptual unit.
+Each cell holds a value that the column name describes.
+
+6. Text, dates, and integers are all data types that can be used in tables.
+
+7.
+- return the date and amount columns from the payments table: 
+date		amount	
+5/1/2016		1500.00	
+5/10/2016		37.00	
+5/15/2016		124.93	
+5/23/2016		54.72	
+
+-return amounts that are over 500 from the payments table:
+amount
+1500.00
+
+- return all data from the payments table where the payee is "Mega Foods":
+date	payee	amount	memo
+5/15/2016	Mega Foods	124.93	Groceries
+
+8.
+-
+SELECT email, signup
+FROM users
+WHERE name = 'DeAndre Data';
+
+-
+SELECT userId
+FROM users
+WHERE email = 'aleesia.algorithm@uw.edu';
+
+-
+SELECT *
+FROM users
+WHERE userId = '4';
+
+
+

@@ -1,0 +1,76 @@
+1. 
+SELECT firstname, lastname
+FROM alums
+WHERE class year = 1993;
+
+2. Such Fab Words
+
+3.
+-SELECT name, gender, age
+FROM dogs
+WHERE breed LIKE '%labrador%';
+
+-SELECT id
+FROM dogs
+WHERE age < 1;
+
+-SELECT name, age
+FROM dogs
+WHERE gender = 'F' AND weight > 35;
+
+-SELECT *
+FROM dogs
+WHERE breed NOT LIKE '%shepherd%';
+
+-SELECT id, age, weight, breed
+FROM dogs
+WHERE weight > 60 OR breed = 'great dane';
+
+4. 
+name	adoption_date
+Mushi	2016-03-22
+Seashell	(null)
+Azul	2016-04-17
+Victoire	2016-09-01
+Nala	(null)
+
+name	age
+Mushi	1
+Seashell	7
+Azul	3
+Victoire	7
+Nala	1
+
+5.
+- SELECT *
+FROM cats;
+
+-SELECT DISTINCT age
+FROM cats;
+
+-SELECT DISTINCT name
+FROM cats;
+
+6.
+= equal - to find a match (id)
+> greater than - searching for alumni whose graduation year is greater than 1950
+>= greather than or equal to - finding a dog whose weight is greater than or equal to 60 lbs
+< less than -  searching for an alum who has not made a gift this year (last gift date is less than 1/1/18)
+<= less than or equal to - finding a dog whose weight is less than or equal to 30 lbs
+<> greater than or less than - find a dog whose weight is greater than 55 or less than 55
+!= does not equal - find all alumni whose graduation year does not equal 1950
+
+7.
+name
+Seashell
+Nala
+
+name
+Mushi
+Seashell
+Victoire
+Nala
+
+id
+3
+4
