@@ -1,0 +1,131 @@
+1. You can find related data held in two separate data tables from a unique indentifier present on both tables.
+
+2. INNER JOIN- will select and return records that have matching values in both tables. 
+Ex: We want a table of alumni who have made a gift in FY18, JOIN will only return alums whose IDs are on the alum table and the FY18 gift table.
+LEFT OUTER JOIN- will select and return all records from the left table and only matching records from the right table. 
+Ex: We want a table of all alumni; FY18 gift will be null for those who have not made a gift.
+RIGHT OUTER JOIN -will select and return all records from the right table and only matching records from the left table.
+Ex: We want a table of all FY18 gifts. Alumni ID will be blank for those gifts that are from parents and friends.
+
+3. A primary key is a unique identifier for each row in a table.
+A foreign key is the primary key of one table, that is used as a non-unique value in another table.
+Ex: An alums ID is a primary key on the consituent table, but a foreign key on the gift summary table.
+
+4. Aliasing is abbreviating names of tables to be a shorter variable name.
+
+5.
+SELECT prof.name, comp.salary, comp.vacation_days
+FROM professor AS prof
+JOIN compensation AS comp
+ON prof.id = comp.professor_id;
+
+6. A NATURAL join will join two tables using all the columns they have in common. 
+Ex: We want a table that shows alumni ID and date of last gift.
+
+7. 
+SELECT employees.name, scheduled_shifts.shift_id
+FROM employees
+JOIN scheduled_shifts
+ON employees.id = scheduled_shifts.employee_id;
+
+8.
+-SELECT volunteers.first_name, dogs.name AS dog_name
+FROM volunteers
+LEFT OUTER JOIN dogs 
+ON volunteers.foster_dog_id = dogs.id;
+
+results: 
+first_name	dog_name
+Rubeus	Munchkin
+Marjorie	Marmaduke
+Sirius	(null)
+Remus	(null)
+Albus	(null)
+
+- SELECT cats.name AS cat_name, adopters.first_name AS adopter_name, cat_adoptions.date AS adoption_date
+FROM cats
+JOIN cat_adoptions ON cats.id = cat_adoptions.cat_id
+JOIN adopters ON cat_adoptions.adopter_id = adopters.id
+WHERE cat_adoptions.date >= (CURRENT_DATE - INTERVAL '30 DAYS');
+
+results:
+cat_name	adopter_name	adoption_date
+Mushi	Arabella	2018-04-09
+Victoire	Argus	2018-04-14
+
+- SELECT adopters.first_name
+FROM adopters
+LEFT OUTER JOIN dog_adoptions
+ON adopters.id = dog_adoptions.adopter_id
+WHERE dog_adoptions.adopter_id IS NULL;
+
+results:
+first_name
+Hermione
+Arabella
+
+- SELECT dogs.name
+FROM dogs
+LEFT OUTER JOIN dog_adoptions
+ON dogs.id = dog_adoptions.dog_id
+WHERE dog_adoptions.dog_id IS NULL
+
+UNION ALL
+
+SELECT cats.name
+FROM cats
+LEFT OUTER JOIN cat_adoptions
+ON cats.id = cat_adoptions.cat_id
+WHERE cat_adoptions.cat_id IS NULL;
+
+results:
+name
+Boujee
+Munchkin
+Marley
+Lassie
+Marmaduke
+Seashell
+Nala
+
+- SELECT adopters.first_name, adopters.last_name
+FROM adopters
+JOIN dog_adoptions
+ON adopters.id = dog_adoptions.adopter_id
+WHERE dog_adoptions.dog_id = 10007;
+
+results:
+first_name	last_name
+Argus	Filch
+
+9.
+
+-SELECT patrons.name, holds.rank
+FROM patrons
+JOIN holds
+ON patrons.id = holds.patron_id
+WHERE isbn = '9136884926';
+
+results:
+name	rank
+Terry Boot	1
+Cedric Diggory	2
+
+-SELECT DISTINCT patrons.name,
+(SELECT checkedout.title AS "books checked out"
+ FROM 
+   (SELECT transactions.patron_id, transactions.checked_in_date, books.title 
+    FROM transactions LEFT OUTER JOIN books ON books.isbn = transactions.isbn 
+    WHERE transactions.checked_in_date IS NULL) AS checkedout 
+  WHERE checkedout.patron_id = patrons.id)
+ FROM patrons
+ LEFT OUTER JOIN transactions ON transactions.patron_id = patrons.id
+ LEFT OUTER JOIN books on books.isbn = transactions.isbn;
+
+ results:
+name	books checked out
+Cedric Diggory	Fantastic Beasts and Where to Find Them
+Cho Chang	(null)
+Hermione Granger	(null)
+Padma Patil	(null)
+Terry Boot	Advanced Potion-Making
